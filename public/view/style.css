@@ -1,0 +1,25 @@
+.jumbotron  ,#token ,#verifyId ,#lat-lon_Button{
+    margin-bottom: 20px;
+}
+
+#SignUpModal ,#SignInModal{
+  margin-bottom: 10px;
+}
+ .footer{
+    background: #022247;
+    color:white;
+  }
+
+  #ExternalLinks {
+    list-style-type:none;
+  }
+
+  ul#ContactLinks li {
+    display:inline;
+  }
+
+.card ,#Details ,#location,#authorization,#demonstration{
+    background-color: #f0eaea;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300 
+} 

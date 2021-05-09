@@ -1,0 +1,33 @@
+{
+  "name": "node.js-restful-web-app",
+  "version": "1.0.0",
+  "description": "Demonstration of RESTful Web App and NeDb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranayusg/Node.js-RESTful-Web-App.git"
+  },
+  "author": "pranayusg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranayusg/Node.js-RESTful-Web-App/issues"
+  },
+  "homepage": "https://github.com/pranayusg/Node.js-RESTful-Web-App#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.1",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "nedb": "^1.8.0",
+    "nodemailer": "^6.6.0",
+    "nodemon": "^2.0.7",
+    "q": "^1.5.1"
+  }
+}

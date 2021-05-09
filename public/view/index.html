@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+  <title>
+    Nodejs RESTful Web App by pranayusg
+  </title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid bg-dark text-white">
+    <div class="container">
+      <h1 class="display-3 text-center pt-2">Node.js RESTful Web App</h1>
+      <p class="lead text-center">This project saves the lat-lon extracted and details provided by client to the
+        database and provides data as requested
+      </p>
+
+      <div class="row">
+        <div class="col-lg-8"></div>
+        <div class="col-lg-1">
+          <!-- Button trigger modal -->
+          <button id="SignUpModal" type="button" class="btn btn-primary " data-bs-toggle="modal"
+            data-bs-target="#formModalSignUp">
+            SignUp
+          </button>
+        </div>
+
+        <div class="col-lg-1">
+          <button id="SignInModal" type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#formModalSignIn">
+            SignIn
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--SignUp Modal -->
+  <div class="container">
+    <div class="modal fade " id="formModalSignUp" tabindex="-1" aria-labelledby="formModalSignUpLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+              <h3 class="modal-title col-12" id="formModalSignUpLabel">Sign Up</h5>
+                <p class="col-12">Please fill in this form to create an account.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+
+          <div class="row g-3 ">
+            <form class="modal-body" action="/user/signup" method="POST">
+
+              <div class="col-sm-12">
+                <label for="email"><b>Email</b></label>
+              </div>
+              <div class="col-sm-12 mb-3">
+                <input type="text" placeholder="Enter Email" name="email" required>
+              </div>
+
+              <div class="col-sm-12">
+              <label for="psw"><b>Password (min 4 characters)</b></label>
+              </div>
+              <div class="col-sm-12 mb-3">
+                <input type="password" placeholder="Enter Password" name="password" required>
+              </div>
+
+              <div class="col-sm-12">
+                <label  for="psw-repeat"><b>Repeat Password</b></label>
+              </div>
+              <div class="col-sm-12 mb-3">
+                <input  type="password" placeholder="Repeat Password" name="password2" required>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Register</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--SignIn Modal -->
+  <div class="container">
+    <div class="modal fade " id="formModalSignIn" tabindex="-1" aria-labelledby="formModalSignInLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+              <h3 class="modal-title col-12" id="formModalSignInLabel">Sign In</h5>
+                <p class="col-12">Please fill in this form to get access token.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+
+          <div class="row g-3 ">
+            <form class="modal-body" action="/user/Signin" method="POST">
+
+              <div class="col-sm-12">
+                <label for="email"><b>Email</b></label>
+              </div>
+              <div class="col-sm-12 mb-3">
+                <input type="text" placeholder="Enter Email" name="email" required>
+              </div>
+
+              <div class="col-sm-12">
+                <label for="psw"><b>Password</b></label>
+              </div>
+              <div class="col-sm-12 mb-3">
+                <input type="password" placeholder="Enter Password" name="password" required>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+              
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card text-center text-white bg-success border-secondary mb-3 ">
+          <div class="card-body">
+            <h3 class="card-title">Tech used</h5>
+            <ul class="card-text">
+              <li>Front end tech (HTML,CSS,JS,Bootstrap) : To design the web page,responsive behaviour and design
+                templates</li>
+              <li>Nodejs & Express : To handle requests from front end and server side logic</li>
+              <li>NeDB (The JavaScript Database): To store data as JS objects</li>
+              <li>Other npm packages used: nodemailer,fs,jsonwebtoken,express-validator,bcrypt,moment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="card text-center text-white bg-danger mb-3 ">
+          <div class="card-body">
+            <h3 class="card-title">Lat-Lon extraction</h5>
+            <p class="card-text"> This web app uses the HTML Geolocation API to get the geographical
+              position of a
+              user. <br /> Since
+              this can
+              compromise privacy, the position is not available unless the user approves it.
+              <br />
+              <br />Note: Geolocation is most accurate for devices with GPS, like smartphone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Token -->
+  <div class="container" id="authorization">
+    <div class="row g-3 mt-3">
+      <h1 class="display-6">Authorization</h1>
+      <div class="col-sm-6">
+        <textarea class="form-control rounded-0" id="token" rows="1" placeholder="Paste token here"
+          style="margin-bottom: 10px;"></textarea>
+        <button type="button" id="verifyId" class="btn btn-primary" onclick="verifyToken()">Verify</button>
+      </div>
+      <div class="col-sm-6">
+        <pre id="decodedtoken" aria-placeholder="Decoded token"></pre>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row g-3 mt-4" id="location">
+      <h1 class="display-6">Lat-Lon extraction </h1>
+      <div class="col-md-6">
+        <label class="form-label">Latitude</label>
+        <textarea readonly class="form-control" id="latitude" rows="1"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Longitude</label>
+        <textarea readonly class="form-control" id="longitude" rows="1"></textarea>
+      </div>
+      <div class="col-md-6">
+        <button id="lat-lon_Button" class="btn btn-primary" onclick="getLatLon()">Know your location</button>
+      </div>
+    </div>
+
+    <form class="row g-3 mt-4" action="/form/formdata/" id="Details" method="post" target="_blank">
+      <h1 class="display-6">Details</h1>
+
+      <input type="hidden" name="headers[authorization]" id="settoken" value="" />
+      <div class="col-md-5">
+        <label for="FirstName" class="form-label">FirstName</label>
+        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Ratan">
+      </div>
+      <div class="col-md-5">
+        <label for="LastName" class="form-label">LastName</label>
+        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Tata">
+      </div>
+
+      <div class="col-12">
+        <label for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" id="description"
+          placeholder="Founder of Tata Group">
+      </div>
+      <div class="col-md-2">
+        <label for="inputCity" class="form-label">Age</label>
+        <input type="number" class="form-control" name="age" id="age" min="4" max="120" placeholder="83">
+      </div>
+      <div class="col-md-2">
+        <label for="inputState" class="form-label">Weight (kgs)</label>
+        <input type="number" class="form-control" name="weight" id="weight" min="20" max="200" placeholder="70">
+      </div>
+      <div class="col-md-2">
+        <label for="Gender" class="form-label">Gender</label>
+        <select name="gender" id="gender" class="form-select">
+          <option selected>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div class="col-12 mb-3">
+        <input type="submit" value="Submit" class="btn btn-primary">
+        <input type="reset" value="Reset" class="btn btn-primary ">
+      </div>
+    </form>
+
+    <div class="row g-3 mt-4" id="demonstration">
+      <h1 class="display-6">NeDb demonstration</h1>
+      <div class="col-sm-6">
+        <p>View live demonstration of NeDb</p>
+        <button class="btn btn-primary mb-3" onclick="window.location.href='getdata.html'">View</button>
+      </div>
+
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="mt-5 pt-4 pb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="mt-lg-0 mt-sm-3">External Links</h5>
+            <ul id="ExternalLinks" class="m-0 p-0">
+              <li> <a href="https://jwt.io/" target="_blank">Source code</a></li>
+              <li> <a href="https://jwt.io/" target="_blank">Test your JWT tokens</a></li>
+              <li> <a href="https://www.npmjs.com/package/nedb" target="_blank">More on NeDb</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-md-3">
+            <h5 class="mt-lg-0 mt-sm-3">Contact</h5>
+            <ul id="ContactLinks" class="m-0 p-0">
+              <li> <a href="mailto:pranayu6@gmail.com"><img src="icons/Gmail.png" alt="Gmail" width="40"
+                    height="40"></a>
+              </li>
+              <li> <a href="https://in.linkedin.com/in/pranay-usgaonkar-576381aa" target="_blank"><img
+                    src="icons/Linkedin.png" alt="Linkedin" width="40" height="30"></a>
+              </li>
+              <li> <a href="https://github.com/pranayusg" target="_blank"><img src="icons/GitHub.png" alt="Github"
+                    width="40" height="36"></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-5">
+            <p class="mt-4">Developed and maintained by pranayusg</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="script.js"> </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

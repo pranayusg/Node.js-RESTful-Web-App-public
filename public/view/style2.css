@@ -1,0 +1,16 @@
+#gender ,#_id ,#weight ,#in ,#substring,#compareLat ,#compareLon{
+    margin-bottom: 10px;
+}
+
+.footer{
+    background: #022247;
+    color:white;
+  }
+
+  #ExternalLinks {
+    list-style-type:none;
+  }
+
+  ul#ContactLinks li {
+    display:inline;
+  }

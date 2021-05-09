@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>
+        Nodejs RESTful Web App by pranayusg
+    </title>
+
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid bg-dark text-white">
+        <div class="container ">
+            <h1 class="display-3 text-center pb-4 pt-2 mb-4">Demonstration of NeDb</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-3 ">
+            <ol>
+                <div class="container">
+
+                    <div class="col-lg-6 mb-3">
+                        <li>
+                            <p>Display all data from db</p>
+                            <button class="btn btn-primary" onclick="getFulldata()">View data</button>
+                            <button class="btn btn-primary" onclick="emptyFulldata()">Reset</button>
+                        </li>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <pre id="fulldata"></pre>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <li>
+                            <p>Get data based on gender</p>
+                            <select name="gender" id="gender" class="form-select">
+                                <option selected>Male</option>
+                                <option>Female</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="getGenderData()">View data</button>
+                            <button class="btn btn-primary" onclick="emptytGenderData()">Reset</button>
+                        </li>
+                    </div>
+                    <div class="col-sm-12">
+                        <pre id="genderData"></pre>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <li>
+                            <p>Get data based on id in db (Copy id from display all data and paste here)</p>
+                            <textarea class="form-control" id="_id" rows="1" placeholder="id from db"></textarea>
+                            <button class="btn btn-primary" onclick="getIdData()">View data</button>
+                            <button class="btn btn-primary" onclick="emptyIdData()">Reset</button>
+                        </li>
+                    </div>
+                    <div class="col-sm-12">
+                        <pre id="idData"></pre>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <li>
+                            <p>Get data greater then input weight</p>
+                            <textarea class="form-control" id="weight" rows="1" placeholder="50"></textarea>
+                            <button class="btn btn-primary" onclick="compareWeights()">View data</button>
+                            <button class="btn btn-primary" onclick="emptyCompareWeights()">Reset</button>
+                        </li>
+                    </div>
+                    <div class="col-sm-12">
+                        <pre id="compareWeights"></pre>
+                    </div>
+
+                    <li>
+                        <div class="col-sm-12 mb-3">
+                            <p>Provide firstnames of people in db separated by comma to get data only for those people
+                                (Using IN operator)</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" id="in" rows="1" placeholder="Ratan, Bill"></textarea>
+                            <button class="btn btn-primary" onclick="inOperator()">View data</button>
+                            <button class="btn btn-primary" onclick="emptyInOperator()">Reset</button>
+                        </div>
+                    </li>
+                    <div class="col-sm-12 mt-3">
+                        <pre id="inOperator"></pre>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <li>
+                            <p>Get names of people in db based on substring of firstname</p>
+                            <textarea class="form-control" id="substring" rows="1"
+                                placeholder="Enter ta if Ratan firstname exists in DB"></textarea>
+                            <button class="btn btn-primary" onclick="substring()">View data</button>
+                            <button class="btn btn-primary" onclick="emptySubstring()">Reset</button>
+                        </li>
+                        <div class="col-sm-12 mt-3">
+                            <pre id="substringData"></pre>
+                        </div>
+                        <li class="mb-3">
+                            <div class="col-sm-12">
+                                <p>We can also deep compare objects in Db.To compare location object in db we need
+                                    proper lat and lon values which exists in db</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <textarea class="form-control" id="compareLat" rows="1"
+                                        placeholder="Latitude"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" id="compareLon" rows="1"
+                                        placeholder="Longitude"></textarea>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="compareLatLon()">View data</button>
+                            <button class="btn btn-primary" onclick="emptyCompareLatLon()">Reset</button>
+                            <!-- </div> -->
+                        </li>
+                        <div class="col-sm-12">
+                            <pre id="CompareLatLon"></pre>
+                        </div>
+
+                    </div>
+            </ol>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="mt-5 pt-4 pb-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="mt-lg-0 mt-sm-3">External Links</h5>
+                        <ul id="ExternalLinks" class="m-0 p-0">
+                            <li> <a href="https://jwt.io/" target="_blank">Source code</a></li>
+                            <li> <a href="https://jwt.io/" target="_blank">Test your JWT tokens</a></li>
+                            <li> <a href="https://www.npmjs.com/package/nedb" target="_blank">More on NeDb</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="mt-4">Developed and maintained by pranayusg</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="mt-lg-0 mt-sm-3">Contact</h5>
+                        <ul id="ContactLinks" class="m-0 p-0">
+                            <li> <a href="mailto:pranayu6@gmail.com"><img src="icons/Gmail.png" alt="Gmail" width="40"
+                                        height="40"></a>
+                            </li>
+                            <li> <a href="https://in.linkedin.com/in/pranay-usgaonkar-576381aa" target="_blank"><img
+                                        src="icons/Linkedin.png" alt="Linkedin" width="40" height="30"></a>
+                            </li>
+                            <li> <a href="https://github.com/pranayusg" target="_blank"><img src="icons/GitHub.png"
+                                        alt="Github" width="40" height="36"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="getDbDataScript.js"></script>
+</body>
+
+</html>
