@@ -113,12 +113,12 @@ datastoreMethods.getCount = function () {
 };
 
 datastoreMethods.deleteData = function () {
-  var defer = Q.defer();
-  db.remove({}, { multi: true }, function(err, numDeleted) {
-    console.log('Deleted', numDeleted, 'records');
-});
-
-  return defer.promise;
+  return new Promise(function (resolve, reject) {
+    db.remove({}, { multi: true }, function (err, numDeleted) {
+      console.log('Deleted', numDeleted, 'records');
+      resolve();
+    });
+  })
 };
 
 module.exports = datastoreMethods;
