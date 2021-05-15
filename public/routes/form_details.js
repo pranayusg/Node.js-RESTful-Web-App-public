@@ -10,7 +10,6 @@ router.post('/location', (req, res) => {
 })
 
 router.post('/formdata',checkAuth, (req, res) => {
-    console.log(req.body)
     if (data.location == undefined) {
         res.send('Please click know your location to submit your location details');
     }
@@ -25,9 +24,18 @@ router.post('/formdata',checkAuth, (req, res) => {
             .then(function (count) {
                 if (count > 9) {
                     datastore.deleteData()
+                    .then(function(){
+                        datastore.insertData(data)
+                        res.json({ message: 'Your Lat-Lon and form details were received successfully', details: data });
+                    })
                 }
-                datastore.insertData(data)
-                res.json({ message: 'Your Lat-Lon and form details were received successfully', details: data });
+                else{
+                        datastore.insertData(data)
+                        res.json({ message: 'Your Lat-Lon and form details were received successfully', details: data });
+                }
+            })
+            .catch(function(err){
+                res.statusCode(500).send("Server didn't respond");
             })
     }
 })
