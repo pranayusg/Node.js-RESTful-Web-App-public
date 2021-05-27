@@ -25,7 +25,7 @@ router.post('/formdata', checkAuth, (req, res) => {
                 if (count > 9) {
                     datastore.deleteData()
                         .then(function () {
-                            // datastore.insertData(data);
+                            datastore.insertData(data);
                             res.status(200).render('formdetails', {
                                 title: 'FormDetails', firstName: data.formdata.firstName, lastName: data.formdata.lastName, description: data.formdata.description,
                                 age: data.formdata.age, weight: data.formdata.weight, gender: data.formdata.gender, lat: data.location.lat, lon: data.location.lon
@@ -33,7 +33,7 @@ router.post('/formdata', checkAuth, (req, res) => {
                         })
                 }
                 else {
-                    // datastore.insertData(data);
+                    datastore.insertData(data);
 
                     res.status(200).render('formdetails', {
                         title: 'FormDetails', firstName: data.formdata.firstName, lastName: data.formdata.lastName, description: data.formdata.description,
