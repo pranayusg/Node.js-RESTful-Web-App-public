@@ -12,7 +12,7 @@ const fs = require('fs');
 var nodemailer = require('nodemailer');
 
 const saltRounds = 10;
-const token2={}
+const token2 = {}
 
 var config = readConfig();
 
@@ -72,58 +72,56 @@ router.post('/signup',
         }
     })
 
-    
+
 router.post('/signin', (req, res) => {
     try {
         datastoreUsers.checkMail(req.body.email)
             .then(function (data) {
                 if (data != null) {
-                            bcrypt.compare(req.body.password, data.password, function (err, result) {
-                                if (err) {
-                                    console.error(err)
-                                }
-                                else {
-                                    if (result == true) {
-                                                payload = { mail: req.body.email, id: data._id }
-                                                options ={ expiresIn: '1h' ,issuer:'pranayusg',audience:'Node.js RESTful Web App'}
-                                                token = jwt.sign(payload, config.privateKey,options );
+                    bcrypt.compare(req.body.password, data.password, function (err, result) {
+                        if (err) {
+                            console.error(err)
+                        }
+                        else {
+                            if (result == true) {
+                                payload = { mail: req.body.email, id: data._id }
+                                options = { expiresIn: '1h', issuer: 'pranayusg', audience: 'Node.js RESTful Web App' }
+                                token = jwt.sign(payload, config.privateKey, options);
 
-                                                /* Uncomment this after you put mailUsername and mailPassword in config.json file in root of this project
-                                                var transporter = nodemailer.createTransport({
-                                                    service: 'gmail',
-                                                    auth: {
-                                                      user: config.mailUsername,
-                                                      pass: config.mailPassword
-                                                    }
-                                                  });
-                                                  
-                                                  var mailOptions = {
-                                                    from: config.mailUsername,
-                                                    to: 'pranayu6@gmail.com',
-                                                    subject: 'Alert your Node.js RESTful Web App was accessed',
-                                                    text: req.body.email+' has signed in your App'
-                                                  }; 
-                                                  
-                                                  transporter.sendMail(mailOptions, function(error, info){
-                                                    if (error) {
-                                                      console.log('There is a error');
-                                                    } else {
-                                                      console.log('Email sent');
-                                                    }
-                                                  });
-                                                  */
+                                var transporter = nodemailer.createTransport({
+                                    service: 'gmail',
+                                    auth: {
+                                        user: config.mailUsername,
+                                        pass: config.mailPassword
+                                    }
+                                });
 
-                                                res.status(200).json({
-                                                     token: token
-                                                })
+                                var mailOptions = {
+                                    from: config.mailUsername,
+                                    to: 'pranayu6@gmail.com',
+                                    subject: 'Alert your Node.js RESTful Web App was accessed',
+                                    text: req.body.email + ' has signed in your App'
+                                };
+
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log('Cannot send mail');
+                                    } else {
+                                        console.log('Email sent');
                                     }
-                                    else {
-                                        res.status(404).json({
-                                            message: 'wrong password'
-                                        })
-                                    }
-                                }
-                            });
+                                });
+
+
+                                res.status(200).render('index', { title: 'gettoken', token: token })
+
+                            }
+                            else {
+                                res.status(404).json({
+                                    message: 'wrong password'
+                                })
+                            }
+                        }
+                    });
 
                 }
                 else {
@@ -140,13 +138,13 @@ router.post('/signin', (req, res) => {
     }
 })
 
-router.get('/verifyToken',checkAuth, (req, res) => {
-    token2.value=req.headers.authorization.split(" ")[1]
-    req.userData.tokenDuration='1 hour'
-    req.userData.issuedAt=moment.unix(req.userData.iat).format("DD-MM-YYYY H:mm:ss");
-    req.userData.expiresAT=moment.unix(req.userData.exp).format("DD-MM-YYYY H:mm:ss");
+router.get('/verifyToken', checkAuth, (req, res) => {
+    token2.value = req.headers.authorization.split(" ")[1]
+    req.userData.tokenDuration = '1 hour'
+    req.userData.issuedAt = moment.unix(req.userData.iat).format("DD-MM-YYYY H:mm:ss");
+    req.userData.expiresAT = moment.unix(req.userData.exp).format("DD-MM-YYYY H:mm:ss");
     res.status(200).json(
-        req.userData  
+        req.userData
     )
 })
 
