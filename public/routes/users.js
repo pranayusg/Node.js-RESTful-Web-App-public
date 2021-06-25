@@ -35,7 +35,8 @@ router.post('/signup',
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            res.setHeader('Content-Type', 'text/html');
+            return res.send('<pre style="font-size: 17px">' + JSON.stringify(errors.array(), undefined, 4) + '</pre> ');
         } else {
             bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                 if (err) {
@@ -50,9 +51,7 @@ router.post('/signup',
                     datastoreUsers.checkMail(property.mail)
                         .then(function (result) {
                             if (result != null) {
-                                res.status(404).json({
-                                    message: 'This mail already exists'
-                                })
+                                res.status(404).render('message', { title: 'Signup Error', message: 'This mail already exists' })
                             }
                             else {
                                 datastoreUsers.getCount()
@@ -61,9 +60,7 @@ router.post('/signup',
                                             datastoreUsers.deleteUsers()
                                         }
                                         datastoreUsers.insertData(property)
-                                        res.status(200).json({
-                                            message: 'User saved'
-                                        })
+                                        res.status(200).render('message', { title: 'Signup Success', message: 'User saved' })
                                     })
                             }
                         });
@@ -105,7 +102,7 @@ router.post('/signin', (req, res) => {
 
                                 transporter.sendMail(mailOptions, function (error, info) {
                                     if (error) {
-                                        console.log('Cannot send mail');
+                                        console.log('There is a error');
                                     } else {
                                         console.log('Email sent');
                                     }
@@ -116,25 +113,19 @@ router.post('/signin', (req, res) => {
 
                             }
                             else {
-                                res.status(404).json({
-                                    message: 'wrong password'
-                                })
+                                res.status(404).render('message', { title: 'Signin Error', message: 'Wrong password' })
                             }
                         }
                     });
 
                 }
                 else {
-                    res.status(422).json({
-                        message: "Mail doesn't exist.Please use the signup route to create user first"
-                    })
+                    res.status(422).render('message', { title: 'Signin Error', message: "Mail doesn't exist.Please use the signup route to create user first" })
                 }
             });
     }
     catch (error) {
-        res.status(400).json({
-            message: 'Invalid request body'
-        })
+        res.status(400).render('message', { title: 'Signin Error', message: 'Invalid request body' })
     }
 })
 

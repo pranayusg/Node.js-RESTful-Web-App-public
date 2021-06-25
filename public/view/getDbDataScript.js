@@ -4,8 +4,10 @@ getToken()
 async function getToken() {
     const response =await  fetch('/user/getToken')
     const data =await  response.json()
-    console.log(data)
+    token.value1=data.value
 }
+
+token.value=localStorage.getItem('Authorization')
 
 async function getFulldata() {
     var options = {

@@ -4,7 +4,7 @@
   "description": "Demonstration of RESTful Web App and NeDb",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll --detectOpenHandles",
     "start": "node server.js"
   },
   "repository": {
@@ -26,9 +26,14 @@
     "jade": "^1.11.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
+    "morgan": "^1.10.0",
     "nedb": "^1.8.0",
     "nodemailer": "^6.6.0",
     "nodemon": "^2.0.7",
     "q": "^1.5.1"
+  },
+  "devDependencies": {
+    "jest": "^27.0.4",
+    "supertest": "^6.1.3"
   }
 }

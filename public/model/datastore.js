@@ -10,9 +10,17 @@ var datastoreMethods = {};
 
 db.loadDatabase();
 
-
 datastoreMethods.insertData = function (data) {
-  db.insert(data)
+  return new Promise(function (resolve, reject) {
+    db.insert(data, function (err, document) {
+      if(err){ 
+        reject();
+      }
+      else{
+      resolve(data);
+      }
+    });
+  })
 }
 
 datastoreMethods.getFullData = function () {
@@ -115,7 +123,14 @@ datastoreMethods.getCount = function () {
 datastoreMethods.deleteData = function () {
   return new Promise(function (resolve, reject) {
     db.remove({}, { multi: true }, function (err, numDeleted) {
-      console.log('Deleted', numDeleted, 'records');
+      resolve();
+    });
+  })
+};
+
+datastoreMethods.removeItem = function (name) {
+  return new Promise(function (resolve, reject) {
+    db.remove({'formdata.firstName' :name}, { multi: true }, function (err, numDeleted) {
       resolve();
     });
   })

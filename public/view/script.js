@@ -45,18 +45,23 @@ function getLatLon() {
 async function verifyToken(){
     token.value=document.getElementById('token').value
 
+    // Store token in local storage
+    window.localStorage.setItem('Authorization',token.value)
+    // If token set through code then it will be lost after refresh
+    
     var options = {
         method: 'GET',
         headers: {
             'Content-Type': "application/json",
-            'Authorization': "Bearer "+token.value
+            'Authorization': "Bearer "+localStorage.getItem('Authorization')
         }
     }
-    console.log(options)
+
     const response = await fetch('/user/verifyToken', options)
     const data = await response.json()
     var object = JSON.stringify(data,undefined, 4)
 
     document.getElementById('decodedtoken').textContent = object;
-    document.getElementById('settoken').value ="Bearer "+token.value;
+   
 }
+document.getElementById('settoken').value ="Bearer "+localStorage.getItem('Authorization');

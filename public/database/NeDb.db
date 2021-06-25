@@ -1,3 +1,4 @@
 {"location":{"lat":47.7511,"lon":120.7401},"formdata":{"firstName":"Bill","lastName":"Gates","description":"Founder of Microsoft Corporation","age":65,"weight":65,"gender":"Male"},"timestamp":1620562200717,"_id":"K8lcg85xUDRtNd6w"}
 {"location":{"lat":33.9806,"lon":117.3755},"formdata":{"firstName":"Ronda","lastName":"Rousey","description":"Former UFC fighter","age":34,"weight":61,"gender":"Female"},"timestamp":1620562079270,"_id":"M5gLX4BPfkxd8003"}
+{"location":{"lat":15.398161900000002,"lon":74.0129474},"formdata":{"firstName":"Warren","lastName":"Buffett","description":"American business magnate, investor, and philanthropist","age":90,"weight":60,"gender":"Male"},"timestamp":1624611134829,"_id":"ca93ZLW5SGFJRSPh"}
 {"location":{"lat":18.9067,"lon":72.8147},"formdata":{"firstName":"Ratan","lastName":"Tata","description":"Founder of Tata group of companies","age":83,"weight":78,"gender":"Male"},"timestamp":1620561706669,"_id":"fsoM49xsyzyhiJro"}
